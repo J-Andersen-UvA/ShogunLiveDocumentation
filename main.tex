@@ -100,6 +100,9 @@ Welcome to the Shogun Live Documentation! In this guide, we delve into various t
 
 \subsubsection{Fine tuning the cameras}
 
+\section{Flir}
+\url{https://help.vicon.com/space/Shogun112/31235480/Set+up+a+FLIR+Blackfly+S+USB3+video+camera+in+Shogun+Live}
+
 \subsection{Vvid or MOV for the flir}
 VVID is the format used for Vicon Video Viewer. In the flir camera setting within Shogun Live, you can switch to MOV if that better suits your purposes.
 
@@ -126,6 +129,33 @@ Now it should run as smooth as butter again.
     \label{fig:socketError}
 \end{figure}
 
+\subsection{RPC unkown function / callback}
+\textit{rpc Unknown: The specified remote function or callback is not known vicon}
+
+Previously, this occurred due to Shogun Live not opening the socket correctly for the client to connect to. Or it was not closed properly? I'm not sure, but I fixed it by closing Shogun Live and then opening it again. If that doesn't fix it, then close Shogun Live and open it again (doing it three times fixed it for me for some reason).
+
+Don't forget, this error can also come from Shogun Post. So make sure to restart this as well.
+
+Lastly, I have also been lucky opening Shogun Post/Live as administrator to fix this issue.
+
+\subsection{Why am I not seeing FLIR video / FLIR is blackscreen / triggerGPOWarning}
+When encountering a blackscreen on the FLIR with the trigger GPO warning (see figure \ref{fig:triggerGPOWarning}), make sure to select the correct Trigger GPO option in the property window of the FLIR camera (see figure \ref{fig:triggerGPO}). It should match the port to which the FLIR camera is connected to the Vicon Lock.
+\begin{figure}[hbt!]
+    \centering
+    \includegraphics[width=.5\textwidth]{imgs/triggerGPOWarning.png}
+    \caption{The Trigger GPO Warning.}
+    \label{fig:triggerGPOWarning}
+\end{figure}
+\begin{figure}[hbt!]
+    \centering
+    \includegraphics[width=.5\textwidth]{imgs/triggerGPO.png}
+    \caption{The Trigger GPO option.}
+    \label{fig:triggerGPO}
+\end{figure}
+
+
+\subsection{Gray cameras / Not contributing, gray play icon}
+When a camera is not contributing (grayed out, gray play icon), that is usually due to the amount of noise coming into the camera. Sadly, you will not see the noise in the camera view because it is not contributing. They way we solved this issue in the past is by simply turning the diaphragm down for the cameras that have this issue. When refocusing a camera, make sure that in addition to putting markers in the scene, you also stand in the scene with some semi-reflective clothing in order to see if all cameras are contributing.
 %-------------------------------------------------------------------------------
 %	REFERENTIES
 %-------------------------------------------------------------------------------
